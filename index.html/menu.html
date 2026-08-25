@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماجد بشير</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 20px 20px 20px;
+            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            border-bottom: 1px solid rgba(234, 179, 8, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #facc15, #eab308, #ca8a04);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 50px;
+            background-color: rgba(17, 24, 39, 0.9);
+            border: 2px solid rgba(234, 179, 8, 0.25);
+            border-radius: 35px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: #eab308;
+            background-color: #111827;
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.25);
+        }
+
+        .search-box .fa-search {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #eab308;
+            font-size: 1.2rem;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: none;
+            transition: 0.2s;
+        }
+
+        .clear-search:hover {
+            color: #eab308;
+        }
+
+        .categories-wrapper {
+            position: sticky;
+            top: 145px;
+            background: rgba(11, 15, 25, 0.92);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .categories-nav {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            white-space: nowrap;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #eab308 transparent;
+        }
+
+        .categories-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .categories-nav::-webkit-scrollbar-thumb {
+            background: #eab308;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            background-color: rgba(17, 24, 39, 0.8);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            border-color: rgba(234, 179, 8, 0.5);
+            background-color: #1f2937;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ca8a04, #eab308, #facc15);
+            color: #0b0f19;
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .category-section {
+            background: rgba(17, 24, 39, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(234, 179, 8, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .section-header i {
+            font-size: 1.6rem;
+            color: #eab308;
+            background: rgba(234, 179, 8, 0.1);
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: #f8fafc;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #111827, #0d1322);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.4s ease forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.96) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #eab308, transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(234, 179, 8, 0.4);
+            box-shadow: 0 15px 30px -10px rgba(234, 179, 8, 0.2);
+            background: linear-gradient(145deg, #182236, #111827);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-img-container {
+            width: 100%;
+            height: 160px;
+            background: #0b0f19;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-img-container:hover img {
+            transform: scale(1.08);
+        }
+
+        .product-img-container::after {
+            content: '\f002';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 15, 25, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eab308;
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-img-container:hover::after {
+            opacity: 1;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background-color: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            width: fit-content;
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .specs {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 15px;
+            background: rgba(11, 15, 25, 0.7);
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .specs i {
+            color: #eab308;
+            font-size: 0.95rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #34d399;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price span {
+            font-size: 0.85rem;
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.12);
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            font-weight: 700;
+        }
+
+        #imageModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 15, 25, 0.92);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #imageModal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #imageModal img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 16px;
+            border: 2px solid rgba(234, 179, 8, 0.4);
+            box-shadow: 0 0 40px rgba(234, 179, 8, 0.25);
+            object-fit: contain;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        #imageModal.active img {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: rgba(234, 179, 8, 0.15);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            color: #eab308;
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #eab308;
+            color: #0b0f19;
+        }
+
+        #backToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #ca8a04, #eab308, #facc15);
+            color: #0b0f19;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            font-weight: bold;
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTopBtn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(234, 179, 8, 0.6);
+        }
+
+        .no-results-msg {
+            text-align: center;
+            padding: 80px 20px;
+            color: #475569;
+            display: none;
+        }
+
+        .no-results-msg i {
+            font-size: 3.5rem;
+            color: rgba(234, 179, 8, 0.2);
+            display: block;
+            margin-bottom: 18px;
+        }
+
+        .no-results-msg p {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-store"></i> مێنیوی دیجیتال - DevCode</h1>
+        <p>به‌رھه‌مه‌کانی مارينا و جاندوست</p>
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="searchInput" placeholder="گه‌ڕان به‌دوای ناوی کاڵادا...">
+            <button class="clear-search" id="clearSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </header>
+
+    <div class="categories-wrapper">
+        <div class="categories-nav" id="categoriesNav">
+            <button class="tab-btn active" data-cat="all">هەموو بەرهەمەکان</button>
+            <button class="tab-btn" data-cat="soap">سابوون</button>
+            <button class="tab-btn" data-cat="liquid-soap">سابونی شل</button>
+            <button class="tab-btn" data-cat="cleaner">پاککەرەوە و کلینکس</button>
+            <button class="tab-btn" data-cat="shampoo">شامپۆ</button>
+            <button class="tab-btn" data-cat="baby">حەفازە و سانی</button>
+            <button class="tab-btn" data-cat="shower">شاوەر جێڵ</button>
+        </div>
+    </div>
+
+    <div class="container" id="menuContainer">
+
+        <!-- ===== سابوونەکان ===== -->
+        <div class="category-section" data-category="soap">
+            <div class="section-header">
+                <i class="fa-solid fa-pump-soap"></i>
+                <h2 class="section-title">سابوونەکان</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="سابوونی مارينا زه‌يتوون">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="40.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) زه‌يتوون</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 60 گرام (6*12)</p>
+                    <div class="price">18,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا لافندر">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="41.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) لافندر</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 60 گرام (6*12)</p>
+                    <div class="price">18,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا گولي به مبه">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="42.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) گولي به مبه</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 60 گرام (6*12)</p>
+                    <div class="price">18,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا ليلي">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="43.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) ليلي</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 60 گرام (6*12)</p>
+                    <div class="price">18,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا زه‌يتوون 125">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="44.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) زه‌يتوون</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 125 گرام (6*8)</p>
+                    <div class="price">23,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا گولي به مبه 125">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="45.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا) گولي به مبه</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 125 گرام (6*8)</p>
+                    <div class="price">23,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا  ياسمين">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="46.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  ياسمين</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 125 گرام (6*8)</p>
+                    <div class="price">23,000 <span>د.ع</span></div>
+                </div>
+                 <div class="product-card" data-name="سابوونی مارينا  ليلي">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="47.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  ليلي</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 125 گرام (6*8)</p>
+                    <div class="price">23,000 <span>د.ع</span></div>
+                </div>
+
+ <div class="product-card" data-name="سابوونی مارينا  گول">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="64.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  گول</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 165 گرام* 48</p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                </div>
+                 <div class="product-card" data-name="سابوونی مارينا  ڤانيلا">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="65.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  ڤانيلا</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i>  165 گرام* 48</p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                </div>
+                 <div class="product-card" data-name="سابوونی مارينا  ياسمين">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="66.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  ياسمين</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i>  165 گرام* 48</p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                </div>
+                 <div class="product-card" data-name="سابوونی مارينا  ليلي">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="67.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابوونی (مارينا)  ليلي</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i>  165 گرام* 48</p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                </div>
+
+
+                <div class="product-card" data-name="سابوونی مارينا بانيو نيڵی ناتورال 4*150">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="48.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*150 سابوونی مارينا بانيو (نيڵی) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 8   </p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا بانيو زه‌يتوون ناتورال 4*150">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="50.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*150 سابوونی مارينا بانيو (زه‌يتوون) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 8 </p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا بانيو زه‌يتوون ناتورال 4*150">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="49.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*150 سابوونی مارينا بانيو (زه‌يتوون) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 8</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="150 سابوونی مارينا بانيو زه‌يتوون ناتورال">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="51.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>150* سابوونی مارينا بانيو (زيتوون) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 24</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا بانيو نيلي ناتورال">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="52.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>150* سابوونی مارينا بانيو (نيلي) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 24 </p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا بانيو به مبه ناتورال">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="53.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>150* سابوونی مارينا بانيو (به مبه) ناتورال</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 24 </p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابوونی مارينا قودی شين">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="54.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*100 سابوونی (مارينا) قودی (شين)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 16 </p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                    
+                </div>
+                  <div class="product-card" data-name="سابوونی مارينا قودی سور">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="55.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*100 سابوونی (مارينا) قودی (سور)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 16 </p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                    
+                </div>
+                  <div class="product-card" data-name="سابوونی مارينا قودی زه ر">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="56.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*100 سابوونی (مارينا) قودی (زه ر)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 16 </p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                    
+                </div>
+                  <div class="product-card" data-name="سابوونی مارينا قودی كه سك">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="57.jpeg" alt="سابوون">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>4*100 سابوونی (مارينا) قودی (كه سك)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 16 </p>
+                    <div class="price">31,500 <span>د.ع</span></div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== سابونی شل ===== -->
+        <div class="category-section" data-category="liquid-soap">
+            <div class="section-header">
+                <i class="fa-solid fa-bottle-droplet"></i>
+                <h2 class="section-title">سابونی شل</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="سابونی شل مارينا له‌ڤه‌نده‌ر">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="1.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) له‌ڤه‌نده‌ر</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 4 * 3 لتر</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا گوڵ">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="2.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) گوڵ</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 4 * 3 لتر</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا زه‌يتوون">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="60.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا )زه‌يتوون</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 4 * 3 لتر</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا حامز">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="4.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) حامز</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا به‌حری">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="3.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) به‌حری</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 4 * 3 لتر</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا گراب فرووت">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="5.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) گراب فرووت</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">13,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا عسل">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="6.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) عسل</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">13,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل مارينا جوز الهند">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="7.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (مارينا) جوز الهند</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">13,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل رغوه ليمو">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="8.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (رغوه) ليمو</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 500 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابونی شل رغوه كه‌سک">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="9.jpeg" alt="سابونی شل">
+                    </div>
+                    <span class="category-tag">سابونی شل</span>
+                    <h3>سابونی شل (رغوه) كه‌سک</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 500 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== پاککەرەوە و کلینکس ===== -->
+        <div class="category-section" data-category="cleaner">
+            <div class="section-header">
+                <i class="fa-solid fa-spray-can-sparkles"></i>
+                <h2 class="section-title">پاککەرەوە و کلینکس</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="پاککەرەوەی (دەستي)">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="71.jpeg" alt="پاککەرەوە">
+                    </div>
+                    <span class="category-tag">پاککەرەوە</span>
+                    <h3>"پاککەرەوەی (دەستي)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> پاککەرەوە</p>
+                    <div class="price">50,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="پاککەرەوەی تەباخ">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="73.jpeg" alt="پاککەرەوە">
+                    </div>
+                    <span class="category-tag">پاککەرەوە</span>
+                    <h3>پاککەرەوەی تەباخ (بەککەرەوە)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> بەککەرەوە</p>
+                    <div class="price">20,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="زاهی قاپان">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="72.jpeg" alt="زاهی">
+                    </div>
+                    <span class="category-tag">پاککەرەوە</span>
+                    <h3>زاهی قاپان</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 1 لتر</p>
+                    <div class="price">36,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="کلينيکسی تەری جاندوست Multi Cleaner">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="10.jpeg" alt="کلینکس">
+                    </div>
+                    <span class="category-tag">کلینکس</span>
+                    <h3>کلينيکسی تەری جاندوست (Multi Cleaner)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 40 * 18</p>
+                    <div class="price">21,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="کلينکس تەر جاندوست به‌یپی">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="11.jpeg" alt="کلینکس">
+                    </div>
+                    <span class="category-tag">کلینکس</span>
+                    <h3>کلينکس تەر (جاندوست) به‌یپی</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 90</p>
+                    <div class="price">10,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="کلينکس تەر جاندوست گوڵ">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="12.jpeg" alt="کلینکس">
+                    </div>
+                    <span class="category-tag">کلینکس</span>
+                    <h3>کلينکس تەر (جاندوست) گوڵ</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 120</p>
+                    <div class="price">10,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="کلينکس تەر جاندوست ساده‌">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="13.jpeg" alt="کلینکس">
+                    </div>
+                    <span class="category-tag">کلینکس</span>
+                    <h3>کلينکس تەر (جاندوست) ساده‌</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 120</p>
+                    <div class="price">10,000 <span>د.ع</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== شامپۆ ===== -->
+        <div class="category-section" data-category="shampoo">
+            <div class="section-header">
+                <i class="fa-solid fa-bottle-water"></i>
+                <h2 class="section-title">شامپۆ</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="شامپۆی مارينا هه‌نار">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="14.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی (مارينا) هه‌نار</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 600 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی مارينا مەکیف">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="15.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی (مارينا) مەکیف</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 600 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی مارينا ڤانێلا">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="16.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی (مارينا) ڤانێلا</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 600 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی مارينا دژە قەشڕە">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="17.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی (مارينا) دژە قەشڕە</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 600 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی مارينا زه‌يتوون">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="18.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی (مارينا) زه‌يتوون</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 600 مل</p>
+                    <div class="price">23,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سابووني منداڵان جاندوست">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="19.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">سابوون</span>
+                    <h3>سابووني منداڵان (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 24*90 غرام</p>
+                    <div class="price">12,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی منداڵان جاندوست">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="69.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی منداڵان (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">15,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شامپۆی منداڵان جاندوست">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="70.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">شامپۆ</span>
+                    <h3>شامپۆی منداڵان (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 400 مل</p>
+                    <div class="price">15,000 <span>د.ع</span></div>
+                </div>
+                  <div class="product-card" data-name="تايد سائيلى (جاندوست) بو جلي مندالان">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="68.jpeg" alt="شامپۆ">
+                    </div>
+                    <span class="category-tag">تايد</span>
+                    <h3>تايد سائيلى (جاندوست) بو جلي مندالان</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 4*1 لتر</p>
+                    <div class="price">10,500 <span>د.ع</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== حەفازە و سانی ===== -->
+        <div class="category-section" data-category="baby">
+            <div class="section-header">
+                <i class="fa-solid fa-baby"></i>
+                <h2 class="section-title">حەفازە و سانی</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="حەفازه رقم 1">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="20.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 1 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 26</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 2">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="21.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 2 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 24</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 3">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="22.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 3 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 22</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 4">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="23.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 4 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 20</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 5">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="24.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 5 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 18</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 6">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="25.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 6 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 14</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 7">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="26.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه رقم 7 (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 5 * 12</p>
+                    <div class="price">15,250 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه‌ی نه‌خۆش Medium">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="27.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه‌ی نه‌خۆش (جاندوست) Medium</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 2 * 30</p>
+                    <div class="price">24,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه‌ی نه‌خۆش Large">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="28.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه‌ی نه‌خۆش (جاندوست) Large</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 2 * 30</p>
+                    <div class="price">24,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه ژماره‌ 4 ئولترا جامبو">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="29.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه (جاندوست) ژماره‌ 4 ئولترا جامبو</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 2 * 100</p>
+                    <div class="price">25,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه رقم 5 ئولترا جامبو">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="30.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه‌ی (جاندوست) رقم 5 ئولترا جامبو</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 2 * 78</p>
+                    <div class="price">25,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="حەفازه ژماره‌ 6 ئولترا">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="31.jpeg" alt="حەفازە">
+                    </div>
+                    <span class="category-tag">حەفازە</span>
+                    <h3>حەفازه‌ی (جاندوست) ژماره‌ 6 ئولترا</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 2 * 62</p>
+                    <div class="price">25,000 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="سانتی جاندوست">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="32.jpeg" alt="سانتی">
+                    </div>
+                    <span class="category-tag">سانتی</span>
+                    <h3>سانتی (جاندوست)</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 8 * 24</p>
+                    <div class="price">15,500 <span>د.ع</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== شاوەر جێڵ ===== -->
+        <div class="category-section" data-category="shower">
+            <div class="section-header">
+                <i class="fa-solid fa-hot-tub-person"></i>
+                <h2 class="section-title">شاوەر جێڵ</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-name="شاوەر جێڵی مارينا ياسه‌مین">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="33.jpeg" alt="شاوەر">
+                    </div>
+                    <span class="category-tag">شاوەر</span>
+                    <h3>شاوەر جێڵی (مارينا) ياسه‌مین</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 450 مل</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شاوەر جێڵی مارينا له‌ڤه‌نده‌ر">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="34.jpeg" alt="شاوەر">
+                    </div>
+                    <span class="category-tag">شاوەر</span>
+                    <h3>شاوەر جێڵی (مارينا) له‌ڤه‌نده‌ر</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 450 مل</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شاوەر جێڵی مارينا گول">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="61.jpeg" alt="شاوەر">
+                    </div>
+                    <span class="category-tag">شاوەر</span>
+                    <h3>شاوەر جێڵی (مارينا) گول</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 450 مل</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شاوەر جێڵی مارينا گول">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="62.jpeg" alt="شاوەر">
+                    </div>
+                    <span class="category-tag">شاوەر</span>
+                    <h3>شاوەر جێڵی (مارينا) فانيلا</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 450 مل</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+                <div class="product-card" data-name="شاوەر جێڵی مارينا گرين تي">
+                    <div class="product-img-container" onclick="openModal(this)">
+                        <img src="63.jpeg" alt="شاوەر">
+                    </div>
+                    <span class="category-tag">شاوەر</span>
+                    <h3>شاوەر جێڵی (مارينا) گرين تي</h3>
+                    <p class="specs"><i class="fa-solid fa-box"></i> 12 * 450 مل</p>
+                    <div class="price">26,500 <span>د.ع</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- پەیامی نەبوونی ئەنجام -->
+        <div class="no-results-msg" id="noResults">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <p>هیچ کاڵایەک نەدۆزرایەوە بەم ناوە</p>
+        </div>
+
+    </div>
+
+    <!-- مۆداڵی وێنە -->
+    <div id="imageModal">
+        <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="وێنەی گەورە">
+    </div>
+
+    <!-- دوگمەی گەڕانەوە بۆ سەرەوە -->
+    <button id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        /* ===== ئاماژەکردن بە هەموو بەشەکان و کارتەکان ===== */
+        var allSections = document.querySelectorAll('.category-section');
+        var allCards = document.querySelectorAll('.product-card');
+        var allBtns = document.querySelectorAll('.tab-btn');
+        var searchInput = document.getElementById('searchInput');
+        var clearBtn = document.getElementById('clearSearchBtn');
+        var noResults = document.getElementById('noResults');
+
+        /* ===== فلتەری بەشەکان ===== */
+        allBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var cat = this.getAttribute('data-cat');
+
+                /* چالاککردنی دوگمە */
+                allBtns.forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+
+                /* پاککردنەوەی گەڕان */
+                searchInput.value = '';
+                clearBtn.style.display = 'none';
+
+                if (cat === 'all') {
+                    /* پیشاندانی هەموو بەشەکان */
+                    allSections.forEach(function(s) {
+                        s.style.display = '';
+                        s.querySelectorAll('.product-card').forEach(function(c) {
+                            c.style.display = '';
+                        });
+                    });
+                } else {
+                    /* پیشاندانی تەنها بەشی دیاریکراو */
+                    allSections.forEach(function(s) {
+                        if (s.getAttribute('data-category') === cat) {
+                            s.style.display = '';
+                            s.querySelectorAll('.product-card').forEach(function(c) {
+                                c.style.display = '';
+                            });
+                        } else {
+                            s.style.display = 'none';
+                        }
+                    });
+                }
+
+                noResults.style.display = 'none';
+                window.scrollTo({ top: 300, behavior: 'smooth' });
+            });
+        });
+
+        /* ===== گەڕان ===== */
+        searchInput.addEventListener('input', function() {
+            var query = this.value.trim().toLowerCase();
+            clearBtn.style.display = query ? 'block' : 'none';
+
+            /* گەڕاندنەوەی هەموو دوگمەکان بۆ حاڵەتی ئاسایی */
+            allBtns.forEach(function(b) { b.classList.remove('active'); });
+
+            var totalVisible = 0;
+
+            allSections.forEach(function(section) {
+                var cards = section.querySelectorAll('.product-card');
+                var sectionHasVisible = false;
+
+                cards.forEach(function(card) {
+                    var name = (card.getAttribute('data-name') || '').toLowerCase();
+                    var h3 = card.querySelector('h3').textContent.toLowerCase();
+                    var match = name.indexOf(query) !== -1 || h3.indexOf(query) !== -1;
+
+                    card.style.display = match ? '' : 'none';
+                    if (match) {
+                        sectionHasVisible = true;
+                        totalVisible++;
+                    }
+                });
+
+                section.style.display = sectionHasVisible ? '' : 'none';
+            });
+
+            /* پەیامی نەبوونی ئەنجام */
+            noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+        });
+
+        /* ===== پاککردنەوەی گەڕان ===== */
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.style.display = 'none';
+            noResults.style.display = 'none';
+
+            /* گەڕاندنەوە بۆ هەموو بەشەکان */
+            allSections.forEach(function(s) {
+                s.style.display = '';
+                s.querySelectorAll('.product-card').forEach(function(c) {
+                    c.style.display = '';
+                });
+            });
+
+            /* چالاککردنەوەی دوگمەی "هەموو" */
+            allBtns.forEach(function(b) { b.classList.remove('active'); });
+            document.querySelector('[data-cat="all"]').classList.add('active');
+        });
+
+        /* ===== مۆداڵی وێنە ===== */
+        function openModal(container) {
+            var img = container.querySelector('img');
+            var modal = document.getElementById('imageModal');
+            modal.querySelector('img').src = img.src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        /* ===== دوگمەی گەڕانەوە بۆ سەرەوە ===== */
+        var backBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                backBtn.classList.add('show');
+            } else {
+                backBtn.classList.remove('show');
+            }
+        });
+    </script>
+
+</body>
+</html>
